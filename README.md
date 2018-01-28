@@ -44,7 +44,7 @@ List of configurable parameters:
 
 Instructions to run project:
 1. Clone the repo using https://github.com/vivek1723/Dmatrix.git
-2. Configure the python interpreter is it asks for.
+2. Configure the python interpreter if it asks for.
 3. Install dependencies using pip install -r requirements.txt
 4. Run test.py to run the test, it will send logs to console.
 
