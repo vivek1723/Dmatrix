@@ -1,19 +1,21 @@
 import re
 from urllib.parse import urlparse
-
+from logSetup import logSetup as CL
 import requests
 from bs4 import BeautifulSoup
-
 
 def verify_Urls(newReq, oldReq):
     """verifies the new and old vendor url"""
     req1 = urlparse(newReq.headers['Location'])
     req2 = urlparse(oldReq.headers['Location'])
-    if req1[1] == req2[1]:
-        return 1, ''
-    nUrl = req1[1]
     # strips the www. from new url like www.google.com will become google.com for new vendors
-    nUrl = nUrl.replace('www.', '')
+    newUrl = re.sub('^www.|:(\d+)$', '', req1[1])
+    oldUrl = req2[1].replace('www.', '')
+    # print(newUrl + "<>" + oldUrl)
+    if newUrl == oldUrl:
+        return 1, ''
+    nUrl = newUrl
+
     return 0, nUrl
 
 
@@ -28,6 +30,7 @@ def verify_Product_Name(data, name):
 def fetch(reqUrl, prodName, dataDict):
     """fetches the required data """
     url = 'http://' + reqUrl
+    # print("Queried URL: " + url)
     # initializing default values for variables
     isUrlIdentical = 1
     newUrl = ''
@@ -75,4 +78,6 @@ def fetch(reqUrl, prodName, dataDict):
                 isProdNamePresent = verify_Product_Name(res.text, prodName)
         except:
             pass
+        if res and res.status_code:
+            statusCode = res.status_code
     return isUrlIdentical, newUrl, isProdNamePresent, statusCode

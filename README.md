@@ -43,7 +43,7 @@ List of configurable parameters:
 5. thread_count (number of threads to achieve multiprocessing like 8,12,16 & 24 etc.)
 
 Instructions to run project:
-1. Please import the project using any python compatible IDE like pyCharm.
+1. Clone the repo using https://github.com/vivek1723/Dmatrix.git
 2. Configure the python interpreter is it asks for.
 3. Install dependencies using pip install -r requirements.txt
 4. Run test.py to run the test, it will send logs to console.
