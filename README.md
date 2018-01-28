@@ -49,3 +49,12 @@ Instructions to run project:
 4. Run test.py to run the test, it will send logs to console.
 
 Note: Please note that I've not implied exception handling as of now.
+
+Performance:
+I've tested 2k data rows using a Quadcore CPU with 4GB RAM on 15 mbps broadband internet connection and following is performance result I observed:
+1. Threads: 2, CPU usage: very low, Total time: ~18 mins 21 seconds
+2. Threads: 10, CPU usage: Low, Total time: ~6 mins 37 seconds
+3. Threads: 16, CPU usage: Low-Medium, Total time: ~4 mins 17 seconds
+4. Threads: 24, CPU usage: Medium-High , Total time: ~2 mins 7 seconds
+
+The 'Total time' is affected by network latency, Ram and CPU.

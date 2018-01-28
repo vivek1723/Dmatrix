@@ -1,8 +1,6 @@
 import os
 from multiprocessing import Pool
-
 import pandas as pd
-
 from config import myconfig
 from logSetup import logSetup as CL
 from utils import req
@@ -92,9 +90,6 @@ if __name__ == "__main__":
 
     df = pd.DataFrame(columns=exCols)
     log.info("Preparing results")
-    # for r in res:
-    #     rowdf = pd.DataFrame([r], columns=exCols)
-    #     df = df.append(rowdf)
 
     rowdf = [pd.DataFrame([r], columns=exCols) for r in res]
     df = pd.concat(rowdf)

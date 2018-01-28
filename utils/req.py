@@ -7,12 +7,12 @@ from bs4 import BeautifulSoup
 def verify_Urls(newReq, oldReq):
     """verifies the new and old vendor url"""
     req1 = urlparse(newReq.headers['Location'])
-    req2 = urlparse(oldReq.headers['Location'])
+    # req2 = urlparse(oldReq.headers['Location'])
+
     # strips the www. from new url like www.google.com will become google.com for new vendors
-    newUrl = re.sub('^www.|:(\d+)$', '', req1[1])
-    oldUrl = req2[1].replace('www.', '')
-    # print(newUrl + "<>" + oldUrl)
-    if newUrl == oldUrl:
+    newUrl = re.sub('^www(\d+)?.|:(\d+)$', '', req1[1])
+
+    if newUrl == oldReq:
         return 1, ''
     nUrl = newUrl
 
@@ -59,11 +59,11 @@ def fetch(reqUrl, prodName, dataDict):
 
             # gets the new and old vendor based on the data received and compares if there is a new vendor
             if res.status_code == 200:
-                if len(res.history) > 2:
+                if len(res.history) >= 2:
                     newReq = res.history[-1]
                     oldReq = res.history[-2]
                     # checks if the new and current vendors are same
-                    isUrlIdentical, newUrl = verify_Urls(newReq, oldReq)
+                    isUrlIdentical, newUrl = verify_Urls(newReq, reqUrl)
 
                 else:
                     statusCode = res.status_code
